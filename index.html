@@ -5,32 +5,55 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css"/>
-	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> -->
 	<script src="https://unpkg.com/vue"></script>
+	<script src="jquery-3.2.1.slim.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
 </head>
 <body>
 
 	<div id="app">
-		<p>Your IP: {{ meta.ip }}</p>
-		<h1>Branch Names</h1>
-		<div v-for="name in branchNames">
-			<div v-for="(k, v) in name">
-				{{ k }}: {{ v }}
-				<hr />
+		<h1>Items</h1>
+		<div class="ui cards">
+			<div class="card" v-for="item in items">
+				<a class="image" href="#">
+					<img v-bind:src="item.image">
+				</a>
+				<div class="content">
+					<a class="header" href="#">{{ item.header }}</a>
+					<div class="meta">
+			  			<a>{{ item.meta }}</a>
+					</div>
+				</div>
 			</div>
 		</div>
-		<h1>Release Branches</h1>
-		<div v-for="name in releaseBranches">
-			<div v-for="(k, v) in name">
-				{{ k }}: {{ v }}
-				<hr />
-			</div>
-		</div>
-
 	</div>
 
+
+	<div class="ui modal">
+	  <i class="close icon"></i>
+	  <div class="header">
+	    Profile Picture
+	  </div>
+	  <div class="image content">
+	    <div class="ui medium image">
+	      <img src="/images/avatar/large/chris.jpg">
+	    </div>
+	    <div class="description">
+	      <div class="ui header">We've auto-chosen a profile image for you.</div>
+	      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+	      <p>Is it okay to use this photo?</p>
+	    </div>
+	  </div>
+	  <div class="actions">
+	    <div class="ui black deny button">
+	      Nope
+	    </div>
+	    <div class="ui positive right labeled icon button">
+	      Yep, that's me
+	      <i class="checkmark icon"></i>
+	    </div>
+	  </div>
+	</div>
 
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="vue.js"></script>
