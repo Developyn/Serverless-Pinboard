@@ -1,0 +1,4 @@
+endpoints:
+  POST - https://wbpv108q00.execute-api.eu-west-1.amazonaws.com/dev/item/new
+  GET - https://wbpv108q00.execute-api.eu-west-1.amazonaws.com/dev/item/get
+  DELETE - https://wbpv108q00.execute-api.eu-west-1.amazonaws.com/dev/item/delete
