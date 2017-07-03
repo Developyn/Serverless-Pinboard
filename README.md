@@ -1,2 +1,2 @@
-# Serverless-Pinboard
-A serverless community pinboard hosted on AWS
+# CE-Services-Dashboard
+Dashboard for displaying the services related to each release

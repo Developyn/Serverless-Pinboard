@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Services Dashboard</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css"/>
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> -->
+	<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+	<div id="app">
+		<p>Your IP: {{ meta.ip }}</p>
+		<h1>Branch Names</h1>
+		<div v-for="name in branchNames">
+			<div v-for="(k, v) in name">
+				{{ k }}: {{ v }}
+				<hr />
+			</div>
+		</div>
+		<h1>Release Branches</h1>
+		<div v-for="name in releaseBranches">
+			<div v-for="(k, v) in name">
+				{{ k }}: {{ v }}
+				<hr />
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="vue.js"></script>
+</body>
+</html>
