@@ -5,54 +5,109 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<script src="https://unpkg.com/vue"></script>
-	<script src="jquery-3.2.1.slim.min.js"></script>
+	<script src="jquery-3.2.1.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+	<script src="https://unpkg.com/vue"></script>
 </head>
 <body>
 
 	<div id="app">
-		<h1>Items</h1>
-		<div class="ui cards">
-			<div class="card" v-for="item in items">
+		<div class="ui two column grid">
+			<div class="column"></div>
+			<div class="column">
+				<div class="ui fluid buttons">
+					<button v-on:click="newItem" class="ui button">New Item</button>
+					<button class="ui button">Log In</button>
+			  		<button class="ui button">Log Out</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui centered cards">
+			<div class="card"  v-on:click="showModal(item.id)" v-for="item in items" v-bind:id="item.id">
 				<a class="image" href="#">
 					<img v-bind:src="item.image">
 				</a>
 				<div class="content">
 					<a class="header" href="#">{{ item.header }}</a>
-					<div class="meta">
-			  			<a>{{ item.meta }}</a>
-					</div>
+					<div class="meta"><a>{{ item.meta }}</a></div>
 				</div>
+				<div class="extra content"><a>£{{ item.price }}</a></div>
+			</div>
+
+			<div class="ui modal select item">
+			  <i class="close icon"></i>
+			  <div class="header">Item Name</div>
+			  <div class="image content">
+				<div class="ui medium image">
+				  <img src="https://semantic-ui.com/images/avatar2/large/rachel.png">
+				</div>
+				<div class="description">
+				  	<div class="ui header">Item Name</div>
+				  	<p>Item description</p>
+				  	<p>£0.00</p>
+				</div>
+			  </div>
+			  <div class="actions">
+				<div class="ui black deny button">
+				  Nope
+				</div>
+				<div class="ui positive right labeled icon button">
+				  Yep, that's me
+				  <i class="checkmark icon"></i>
+				</div>
+			  </div>
 			</div>
 		</div>
-	</div>
 
+		<div class="ui modal new item">
+		  <i class="close icon"></i>
+		  <div class="header">New Item</div>
+		  <div class="image content">
+			<div class="ui medium image">
+				<div v-if="!image">
+					<h2>Select an image</h2>
+					<input type="file" @change="onFileChange">
+				</div>
+				<div v-else>
+					<img :src="image" />
+					<button class="ui basic button" @click="removeImage">Remove image</button>
+				</div>
+			</div>
+			<div class="description">
+				<div class="ui header">Add a new item</div>
+					<!-- NAME -->
+					<p>
+						<div class="ui labeled input">
+							<div class="ui label">Name</div>
+							<input type="text" v-model="name" placeholder="Name">
+						</div>
+					</p>
 
-	<div class="ui modal">
-	  <i class="close icon"></i>
-	  <div class="header">
-	    Profile Picture
-	  </div>
-	  <div class="image content">
-	    <div class="ui medium image">
-	      <img src="/images/avatar/large/chris.jpg">
-	    </div>
-	    <div class="description">
-	      <div class="ui header">We've auto-chosen a profile image for you.</div>
-	      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-	      <p>Is it okay to use this photo?</p>
-	    </div>
-	  </div>
-	  <div class="actions">
-	    <div class="ui black deny button">
-	      Nope
-	    </div>
-	    <div class="ui positive right labeled icon button">
-	      Yep, that's me
-	      <i class="checkmark icon"></i>
-	    </div>
-	  </div>
+					<!-- DESCRIPTION -->
+					<p>
+						<div class="ui form field">
+							<label>Description</label>
+							<textarea rows="3" v-model="desc"></textarea>
+						</div>
+					</p>
+
+					<!-- PRICE -->
+					<p>
+						<div class="ui labeled input">
+							<div class="ui label">£</div>
+							<input type="text" v-model="price" placeholder="Amount">
+						</div>
+					</p>
+			</div>
+		  </div>
+		  <div class="actions">
+			<div class="ui red deny button">Cancel</div>
+			<div class="ui positive right labeled icon button" v-on:click="confirmItem">Confirm<i class="checkmark icon"></i></div>
+		</div>as
+		</div>
+
 	</div>
 
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
