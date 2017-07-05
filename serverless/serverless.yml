@@ -68,10 +68,63 @@ functions:
 
 resources:
  Resources:
-   NewResource:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: cognito-pinboard
+    S3Bucket:
+        Type: AWS::S3::Bucket
+        Properties:
+            AccessControl: PublicRead
+            BucketName: cognito-pinboard
+            WebsiteConfiguration:
+                IndexDocument: index.html
+                RoutingRules:
+                - RoutingRuleCondition:
+                      HttpErrorCodeReturnedEquals: '404'
+                      KeyPrefixEquals: out1/
+                  RedirectRule:
+                      ReplaceKeyPrefixWith: report-404/
+            CorsConfiguration:
+                  CorsRules:
+                  - AllowedMethods:
+                    - GET
+                    - PUT
+                    - POST
+                    - HEAD
+                    AllowedOrigins:
+                    - "*"
+                    AllowedHeaders:
+                    - "*"
+    # S3BucketPolicy:
+    #   Type: "AWS::S3::BucketPolicy"
+    #   Properties:
+    #     Bucket: cognito-pinboard
+    #     PolicyDocument:
+    #       Statement:
+    #         -
+    #           Action:
+    #             - "s3:GetObject"
+    #           Effect: "Allow"
+    #           Resource:
+    #             Fn::Join:
+    #               - ""
+    #               -
+    #                 - "arn:aws:s3:::cognito-pinboard"
+    #                 -
+    #                   Ref: "cognito-pinboard"
+    #                 - "/*"
+    #           Principal: "*"
+    usersTable:
+        Type: AWS::DynamoDB::Table
+        Properties:
+            TableName: pinboardTable
+            AttributeDefinitions:
+                - AttributeName: id
+                  AttributeType: S
+            KeySchema:
+                - AttributeName: id
+                  KeyType: HASH
+            ProvisionedThroughput:
+                ReadCapacityUnits: 1
+                WriteCapacityUnits: 1
+
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"

@@ -79,7 +79,7 @@
 				<div class="ui header">Add a new item</div>
 					<!-- NAME -->
 					<p>
-						<div class="ui labeled input">
+						<div class="ui fluid labeled input">
 							<div class="ui label">Name</div>
 							<input type="text" v-model="name" placeholder="Name">
 						</div>
@@ -87,15 +87,31 @@
 
 					<!-- DESCRIPTION -->
 					<p>
-						<div class="ui form field">
+						<div class="ui fluid form field">
 							<label>Description</label>
 							<textarea rows="3" v-model="desc"></textarea>
 						</div>
 					</p>
 
+					<!-- PHONE NUMBER -->
+					<p>
+						<div class="ui fluid labeled input">
+							<div class="ui label">Phone</div>
+							<input type="text" v-model="phone" placeholder="Phone Number">
+						</div>
+					</p>
+
+					<!-- EMAIL ADDRESS -->
+					<p>
+						<div class="ui fluid labeled input">
+							<div class="ui label">Email</div>
+							<input type="text" v-model="email" placeholder="Email Address">
+						</div>
+					</p>
+
 					<!-- PRICE -->
 					<p>
-						<div class="ui labeled input">
+						<div class="ui fluid labeled input">
 							<div class="ui label">£</div>
 							<input type="text" v-model="price" placeholder="Amount">
 						</div>
